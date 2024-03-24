@@ -9,7 +9,7 @@ def load_model(modelfile):
 	return loaded_model
 
 
-st.title("Predicting Whether a user will Bounce or Not")
+st.title("Petrol Price Forecasting")
 data = st.file_uploader("Upload an File", type=["csv"])
 
 if st.button('Predict'):
@@ -29,7 +29,7 @@ if st.button('Predict'):
     #df = df.drop("Date", axis=1)
 
     # loading Model
-    loaded_model = load_model('rf_model.pkl')
+    loaded_model = load_model('Rf_model.pkl')
     # Results DataFrame
     result = loaded_model.predict(df[['Year','Month','Day']])
 
