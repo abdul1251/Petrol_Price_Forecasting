@@ -16,8 +16,7 @@ if st.button('Predict'):
 
     # read dataset
     df = pd.read_csv(data)
-    train_df = pd.read_csv('train_data.csv')
-    train_df['Date'] = pd.to_datetime(train_df['Date'])
+    train_df = pd.read_csv('training_data.csv')
 
     df = df.dropna()
     # Convert 'Date' column to datetime format
@@ -30,7 +29,7 @@ if st.button('Predict'):
     #df = df.drop("Date", axis=1)
 
     # loading Model
-    loaded_model = load_model('model.pkl')
+    loaded_model = load_model('rf_model.pkl')
     # Results DataFrame
     result = loaded_model.predict(df[['Year','Month','Day']])
 
