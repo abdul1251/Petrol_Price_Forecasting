@@ -17,6 +17,7 @@ if st.button('Predict'):
     # read dataset
     df = pd.read_csv(data)
     train_df = pd.read_csv('train_data.csv')
+    train_df['Date'] = pd.to_datetime(train_df['Date'])
 
     df = df.dropna()
     # Convert 'Date' column to datetime format
