@@ -24,6 +24,7 @@ if st.button('Predict'):
     df['Year'] = df['Date'].dt.year
     df['Month'] = df['Date'].dt.month
     df['Day'] = df['Date'].dt.day
+    df = df.drop("Date", axis=1)
     st.dataframe(df)
 
     # loading Model
