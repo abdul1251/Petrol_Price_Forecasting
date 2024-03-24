@@ -24,6 +24,7 @@ if st.button('Predict'):
     df['Year'] = df['Date'].dt.year
     df['Month'] = df['Date'].dt.month
     df['Day'] = df['Date'].dt.day
+    st.dataframe(df)
 
     # loading Model
     loaded_model = load_model('model.pkl')
