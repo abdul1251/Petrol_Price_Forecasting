@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import pickle
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def load_model(modelfile):
 	loaded_model = pickle.load(open(modelfile, 'rb'))
@@ -15,6 +16,7 @@ if st.button('Predict'):
 
     # read dataset
     df = pd.read_csv(data)
+    train_df = pd.read_csv('train_data.csv')
 
     df = df.dropna()
     # Convert 'Date' column to datetime format
@@ -24,14 +26,32 @@ if st.button('Predict'):
     df['Year'] = df['Date'].dt.year
     df['Month'] = df['Date'].dt.month
     df['Day'] = df['Date'].dt.day
-    df = df.drop("Date", axis=1)
-    st.dataframe(df)
+    #df = df.drop("Date", axis=1)
 
     # loading Model
     loaded_model = load_model('model.pkl')
+    # Results DataFrame
+    result = loaded_model.predict(df[['Year','Month','Day']])
 
+    df['Prediction'] = result
 
-    result = loaded_model.predict(df)
+    # Create a Matplotlib figure
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-    df['User_Bounce'] = result
-    st.dataframe(df)
+    # Plot the petrol prices over time from train_df
+    ax.plot(train_df['Date'], train_df['Petrol (USD)'], label='Actual Petrol Price')
+
+    # Plot the predicted petrol prices over time from df
+    ax.plot(df['Date'], df['Prediction'], label='Predicted Petrol Price')
+
+    # Set title and labels
+    ax.set_title('Petrol Prices Over Time')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Petrol Price (USD)')
+    ax.tick_params(axis='x', rotation=45)
+
+    # Add legend
+    ax.legend()
+
+    # Show plot in Streamlit
+    st.pyplot(fig)
