@@ -29,7 +29,7 @@ if st.button('Predict'):
     #df = df.drop("Date", axis=1)
 
     # loading Model
-    loaded_model = load_model('Rf_model.pkl')
+    loaded_model = pickle.load(open('Rf_model.pkl', 'rb'))
     # Results DataFrame
     result = loaded_model.predict(df[['Year','Month','Day']])
 
