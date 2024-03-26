@@ -21,12 +21,12 @@ if st.button('Predict'):
     df = df.dropna()
     # Convert 'Date' column to datetime format
     df['Date'] = pd.to_datetime(df['Date'])
+    train_df['Date'] = pd.to_datetime(train_df['Date'])
 
     # Feature Engineering: Extract additional features from the 'Date' column
     df['Year'] = df['Date'].dt.year
     df['Month'] = df['Date'].dt.month
     df['Day'] = df['Date'].dt.day
-    #df = df.drop("Date", axis=1)
 
     # loading Model
     loaded_model = pickle.load(open('model.pkl', 'rb'))
