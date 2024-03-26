@@ -34,7 +34,7 @@ if st.button('Predict'):
     result = loaded_model.predict(df[['Year','Month','Day']])
 
     df['Prediction'] = result
-
+    st.dataframe(df)
     # Create a Matplotlib figure
     fig, ax = plt.subplots(figsize=(10, 6))
 
